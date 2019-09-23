@@ -41,7 +41,7 @@ print('\n')
 def test_tmplt():
     file = open("occupations.csv", "r")
     lines = file.readlines()[1:] #skip header line
-    lines = lines[:-1] #get rid of total line since that is not useful for this assignment
+    #lines = lines[:-1] #get rid of total line since that is not useful for this assignment
 
     #Make empty dictionaries and array for random selection
     occupationsDict = {}
