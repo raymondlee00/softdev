@@ -17,15 +17,20 @@ def welcome():
 
 @app.route('/auth', methods=['get'])
 def checklogin():
+    error = None
     username = request.args['username']
     password = request.args['password']
     if username == admin_user and password == admin_pw:
         session['user'] = username
-    return redirect(url_for('index'))
+        flash('You were successfully logged in')
+        return redirect(url_for('index'))
+    else:
+        error = 'Invalid credentials'
+        return render_template("form.html",error = error)
 
 @app.route('/logout')
 def logout():
-    # remove the username from the session if it's there
+    # remove the username from te session if it's there
     session.pop('user', None)
     return redirect(url_for('index'))
 if __name__ == "__main__":

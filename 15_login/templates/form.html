@@ -9,11 +9,18 @@
     <center>
       <h1>Team AnIOop</h1>
       <h4>Joseph Lee, Raymond Lee</h4><br>
-      <form action="/auth" method="get">
-        Username: <input type="text" name="username"><br>
-        Password: <input type="text" name="password"><br>
-        <input type="submit" value="Login"><br>
+      {% extends "layout.html" %}
+      {% block body %}
+      <h1>Login</h1>
+      {% if error %}
+        <p class=error><strong>Error:</strong> {{ error }}
+          {% endif %}
+          <form action="/auth" method='get'>
+            Username: <input type="text" name="username"><br>
+            Password: <input type="text" name="password"><br>
+          <input type="submit" value="Login"><br>
       </form>
+      {% endblock %}
   </center>
   </body>
 </html>
