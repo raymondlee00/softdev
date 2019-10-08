@@ -1,4 +1,4 @@
-#Clyde "Thluffy" Sinclair
+#ray. lee. and junhee lee
 #SoftDev  
 #skeleton :: SQLITE3 BASICS
 #Oct 2019
