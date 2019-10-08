@@ -38,8 +38,8 @@ for key in occupationsDict:
 print('\n')
 
 @app.route("/occupyflaskst")
-def test_tmplt():
-    file = open("occupations.csv", "r")
+def occupations_tmplt():
+    file = open("/data/occupations.csv", "r")
     lines = file.readlines()[1:] #skip header line
     #lines = lines[:-1] #get rid of total line since that is not useful for this assignment
 
