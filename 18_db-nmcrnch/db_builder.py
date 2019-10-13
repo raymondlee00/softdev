@@ -84,6 +84,12 @@ def calculateMeanAndInput():
 
 # facilating adding rows to courses table
 c.execute("INSERT INTO courses VALUES (\"{}\", {}, {});".format("multi", 100, 1))
+c.execute("INSERT INTO courses VALUES (\"{}\", {}, {});".format("complex", 100, 2))
+c.execute("INSERT INTO courses VALUES (\"{}\", {}, {});".format("softdev", 100, 3))
+c.execute("INSERT INTO courses VALUES (\"{}\", {}, {});".format("systems", 100, 4))
+c.execute("INSERT INTO courses VALUES (\"{}\", {}, {});".format("physicsc", 100, 5))
+c.execute("INSERT INTO courses VALUES (\"{}\", {}, {});".format("macro", 100, 6))
+
 calculateMeanAndInput() # run this function to update the stu_mean with the new "multi" grade for student 1
 
 #==========================================================
