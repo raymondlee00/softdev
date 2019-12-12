@@ -84,7 +84,7 @@ var addFib = function(e) {
   var numLi = list.getElementsByTagName('li').length;
   item.innerText = fibonacci(numLi);
   item.onmouseover = () => {
-    document.getElementById("h").innerText = "WORD";
+    document.getElementById("h").innerText = item.innerText;
   };
   item.onclick = () => {
     console.log('hello');
