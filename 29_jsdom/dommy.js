@@ -30,3 +30,13 @@ for (var i = 0; i < lis.length; i++) {
     removeItem(e);
   });
 }
+
+var bbtn = document.getElementById("b");
+bbtn.addEventListener("click", () => {
+    var li = document.createElement("li");
+    var thelist = document.getElementById("thelist");
+    var numLi = thelist.getElementsByTagName('li').length;
+    li.innerHTML = "item " + numLi;
+    thelist.appendChild(li)
+});
+
