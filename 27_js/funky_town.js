@@ -1,3 +1,13 @@
+function fact(n) {
+  var res = 1;
+  while (n > 0) {
+    res *= n;
+    n--;
+    // console.log(n);
+  }
+  return res;
+}
+
 function fibonacci(i) {
   return (
     (1 / Math.sqrt(5)) *
@@ -31,4 +41,31 @@ function gcd(x, y) {
 
 function randomStudent(arr) {
     return arr[Math.floor(arr.length * Math.random())];
+}
+
+function changeOutput(objID) {
+    htmlObj = document.getElementById(objID);
+    // console.log('hello');
+    var output = '';
+    if (objID == 'factOutput') {
+      output = fact(10);
+      var res = "The factorial of 10 is: " + output;
+      htmlObj.innerHTML = res;
+      console.log(res);
+    } else if (objID == 'fibOutput') {
+      output = fibonacci(1200);
+      var res = "The 1200th fibonacci number is: " + output;
+      htmlObj.innerHTML = res;
+      console.log(res);
+    } else if (objID == "gcdOutput") {
+      output = gcd(54, 88);
+      var res = "The gcd between 54 and 88 is: " + output;
+      htmlObj.innerHTML = res;
+      console.log(res);
+    } else {
+      output = randomStudent(['erc', 'kaz', 'matt', 'mike', 'ray', 'sad']);
+      var res = "And the random student is..." + output + "!";
+      htmlObj.innerHTML = res;
+      console.log(res);
+    }
 }

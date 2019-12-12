@@ -8,10 +8,17 @@
     <title>JS work the first</title>
   </head>
   <body>
-    <H1>OPEN UP YOUR DEV CONSOLE AND RUN YOUR JS FUNCTIONS!!!</H1>
+    <h1>OPEN UP YOUR DEV CONSOLE AND RUN YOUR JS FUNCTIONS!!!</h1>
     <h3>(Ctrl-Shift-J in Chrome)</h3>
     <h3>(Ctrl-Shift-K in Firefox)</h3>
-
+    <button type="button" onclick="changeOutput('factOutput')"> fact(10) </button>
+    <p id="factOutput"> output </p>
+    <button type="button" onclick="changeOutput('fibOutput')"> fibonacci(1200) </button>
+    <p id="fibOutput"> </p>
+    <button type="button" onclick="changeOutput('gcdOutput')"> gcd(54, 88) </button>
+    <p id="gcdOutput"> </p>
+    <button type="button" onclick="changeOutput('randomStudentOutput')"> randomStudent(['erc', 'kaz', 'matt', 'mike', 'ray', 'sad']) </button>
+    <p id=randomStudentOutput> </p>
     <script src="funky_town.js"></script>
   </body>
 </html>
