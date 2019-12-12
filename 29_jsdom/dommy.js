@@ -81,7 +81,8 @@ var addFib = function(e) {
   console.log(e);
   var list = document.getElementById("fiblist");
   var item = document.createElement("li");
-  item.innerText = "WORD";
+  var numLi = list.getElementsByTagName('li').length;
+  item.innerText = fibonacci(numLi);
   item.onmouseover = () => {
     document.getElementById("h").innerText = "WORD";
   };
