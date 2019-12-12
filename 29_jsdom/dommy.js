@@ -24,7 +24,9 @@ for (var i = 0; i < lis.length; i++) {
   lis[i].addEventListener("mouseover", e => {
     changeHeading(e);
   });
-  lis[i].addEventListener("mouseout", () => {document.getElementById('h').innerHTML = "Hello World!"});
+  lis[i].addEventListener("mouseout", () => {
+    document.getElementById("h").innerHTML = "Hello World!";
+  });
   lis[i].addEventListener("click", e => {
     // console.log(e);
     removeItem(e);
@@ -36,16 +38,18 @@ for (var i = 0; i < lis.length; i++) {
 //     var li = document.createElement("li");
 //     var thelist = document.getElementById("thelist");
 //     var numLi = thelist.getElementsByTagName('li').length;
-    
+
 //     thelist.appendChild(li)
 // });
 
 var addItem = function(e) {
-    var list = document.getElementById("thelist");
-    var item = document.createElement("li");
-    var numLi = list.getElementsByTagName('li').length;
-    item.innerText = "item " + numLi;
-    list.appendChild(item);
+  var list = document.getElementById("thelist");
+  var item = document.createElement("li");
+  item.innerText = "WORD";
+  item.onmouseover = () => {
+    document.getElementById("h").innerText = "WORD";
+  };
+  list.appendChild(item);
 };
 
 var button = document.getElementById("b");
@@ -56,3 +60,11 @@ button.addEventListener("click", addItem);
 //     var li = crea
 // });
 
+var addFib = function(e) {
+    console.log(e);
+};
+
+var addFib2 = function(e) {
+    console.log(e);
+
+};
