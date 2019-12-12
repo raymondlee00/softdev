@@ -10,7 +10,7 @@ var changeHeading = function(e) {
   const res = e["target"]["innerText"];
   h.innerHTML = res;
   console.log(res);
-  // console.log(e);
+  console.log(e);
 };
 
 var removeItem = function(e) {
@@ -31,12 +31,28 @@ for (var i = 0; i < lis.length; i++) {
   });
 }
 
-var bbtn = document.getElementById("b");
-bbtn.addEventListener("click", () => {
-    var li = document.createElement("li");
-    var thelist = document.getElementById("thelist");
-    var numLi = thelist.getElementsByTagName('li').length;
-    li.innerHTML = "item " + numLi;
-    thelist.appendChild(li)
-});
+// var bbtn = document.getElementById("b");
+// bbtn.addEventListener("click", () => {
+//     var li = document.createElement("li");
+//     var thelist = document.getElementById("thelist");
+//     var numLi = thelist.getElementsByTagName('li').length;
+    
+//     thelist.appendChild(li)
+// });
+
+var addItem = function(e) {
+    var list = document.getElementById("thelist");
+    var item = document.createElement("li");
+    var numLi = list.getElementsByTagName('li').length;
+    item.innerText = "item " + numLi;
+    list.appendChild(item);
+};
+
+var button = document.getElementById("b");
+button.addEventListener("click", addItem);
+
+// var fbbtn = document.getElementById("fb");
+// fbbtn.addEventListener("click", () => {
+//     var li = crea
+// });
 
