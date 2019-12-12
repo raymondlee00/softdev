@@ -21,11 +21,12 @@ var removeItem = function(e) {
 var lis = document.getElementsByTagName("li");
 
 for (var i = 0; i < lis.length; i++) {
-  lis[i].addEventListener("mouseover", (e) => {
+  lis[i].addEventListener("mouseover", e => {
     changeHeading(e);
   });
-  //   lis[i].addEventListener("mouseout");
-  lis[i].addEventListener("click", (e) => {
+  lis[i].addEventListener("mouseout", () => {document.getElementById('h').innerHTML = "Hello World!"});
+  lis[i].addEventListener("click", e => {
+    // console.log(e);
     removeItem(e);
   });
 }
