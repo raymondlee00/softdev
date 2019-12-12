@@ -54,7 +54,7 @@ function changeOutput(objID) {
       console.log(res);
     } else if (objID == 'fibOutput') {
       output = fibonacci(1200);
-      var res = "The 212nd fibonacci number is: " + output;
+      var res = "The 1200th fibonacci number is: " + output;
       htmlObj.innerHTML = res;
       console.log(res);
     } else if (objID == "gcdOutput") {
