@@ -1,100 +1,80 @@
-function fibRecur(i) {
-  if (i < 2) {
-    return i;
-  }
-  fibRecur(i - 1) + fibRecur(i - 2);
-}
+/*
+  Solon - Eric "Morty" Lau, Raymond Lee
+  SoftDev1 pd1
+  K29 --  Sequential Progression III: Season of the Witch
+  2019-12-12
+*/
 
-function fibonacci(i) {
-  return Math.floor(
-    (1 / Math.sqrt(5)) *
-    (Math.pow((1 + Math.sqrt(5)) / 2, i) - Math.pow((1 - Math.sqrt(5)) / 2, i))
-  );
-}
-
-// var dp = [0, 1];
-// function fibDP(n) {
-//     var counter = dp.length;
-//     while (counter < n) {
-//         dp[counter] = dp[counter - 1] + dp[counter - 2];
-//         counter++;
-//     }
-//     return dp[n];
-// }
-
-var changeHeading = function(e) {
-  var h = document.getElementById("h");
-  const res = e["target"]["innerText"];
-  h.innerHTML = res;
-//   console.log(res);
-//   console.log(e);
+var changeHeading = function (e) {
+    console.log(e);
+    var h = document.getElementById("h");
+    h.innerHTML = this.innerHTML;
 };
 
-var removeItem = function(e) {
-//   console.log(e["target"]["firstChild"]);
-  e["target"].remove();
+var removeItem = function (e) {
+    console.log(e);
+    this.remove();
 };
+
+var addListeners = function (element) {
+    element.addEventListener("mouseover", changeHeading);
+    element.addEventListener("mouseout", () => {
+        document.getElementById("h").innerHTML = "Hello World!";
+    });
+    element.addEventListener("click", removeItem);
+}
 
 var lis = document.getElementsByTagName("li");
 
 for (var i = 0; i < lis.length; i++) {
-  lis[i].addEventListener("mouseover", e => {
-    changeHeading(e);
-  });
-  lis[i].addEventListener("mouseout", () => {
-    document.getElementById("h").innerHTML = "Hello World!";
-  });
-  lis[i].addEventListener("click", e => {
-    // console.log(e);
-    removeItem(e);
-  });
+    addListeners(lis[i]);
 }
 
-// var bbtn = document.getElementById("b");
-// bbtn.addEventListener("click", () => {
-//     var li = document.createElement("li");
-//     var thelist = document.getElementById("thelist");
-//     var numLi = thelist.getElementsByTagName('li').length;
-
-//     thelist.appendChild(li)
-// });
-
-var addItem = function(e) {
-  var list = document.getElementById("thelist");
-  var item = document.createElement("li");
-  item.innerText = "WORD";
-  item.onmouseover = () => {
-    document.getElementById("h").innerText = "WORD";
-  };
-  list.appendChild(item);
+var addItem = function (e) {
+    console.log(e);
+    var list = document.getElementById("thelist");
+    var item = document.createElement("li");
+    item.innerHTML = "WORD";
+    addListeners(item);
+    list.appendChild(item);
 };
 
 var button = document.getElementById("b");
 button.addEventListener("click", addItem);
 
-// var fbbtn = document.getElementById("fb");
-// fbbtn.addEventListener("click", () => {
-//     var li = crea
-// });
+var addFib = function (e, fibFunc) {
+    console.log(e);
+    var list = document.getElementById("fiblist");
+    var item = document.createElement("li");
+    var numLi = list.getElementsByTagName('li').length;
+    item.innerHTML = fibFunc(numLi);
+    list.appendChild(item);
+}
 
-var addFib = function(e) {
-//   console.log(e);
-  var list = document.getElementById("fiblist");
-  var item = document.createElement("li");
-  var numLi = list.getElementsByTagName('li').length;
-  item.innerText = fibonacci(numLi);
-  item.onmouseover = () => {
-    document.getElementById("h").innerText = item.innerText;
-  };
-  item.onclick = () => {
-    console.log('hello');
-  }
-  list.appendChild(item);
-};
+var addFibRecur = function (e) { addFib(e, fibRecur); };
 
-var addFib2 = function(e) {
-//   console.log(e);
-};
+var addFibBinet = function (e) { addFib(e, fibBinet); }
+
+var addFibDP = function (e) { addFib(e, fibDP); }
+
+var fibRecur = function (i) {
+    return (i < 2) ? i : fibRecur(i - 1) + fibRecur(i - 2);
+}
+
+var fibBinet = function (i) {
+    var root5 = Math.sqrt(5);
+    var phi = (1 + root5) / 2;
+    var psi = (1 - root5) / 2;
+    return Math.floor(
+        (Math.pow(phi, i) - Math.pow(psi, i)) / root5
+    );
+}
+
+var fibList = [];
+var fibDP = function (i) {
+    fibList[i] = (i < 2) ? i : fibList[i - 1] + fibList[i - 2];
+    return fibList[i];
+}
 
 var fb = document.getElementById("fb");
-fb.addEventListener("click", addFib);
+fb.addEventListener("click", addFibDP);
