@@ -1,16 +1,21 @@
 // retrieve node in DOM via ID
 var canvas = document.getElementById("slate");
+
 // instantiate a CanvasRenderingContext2D object
 var ctx = canvas.getContext("2d");
-console.log(ctx);
+
 // invoke interface methods
 ctx.fillStyle = "#ff0000";
-//   ctx.fillRect(50, 50, 100, 200);
+
 var mode = "rectangle";
+
 function draw(event) {
+
+  // correct canvas bounds offset on mouse's x, y position
   let rect = canvas.getBoundingClientRect();
   let x = event.clientX - rect.left;
   let y = event.clientY - rect.top;
+
   if (mode == "rectangle") {
     ctx.fillRect(x, y, 100, 200);
   } else {
@@ -24,6 +29,7 @@ function draw(event) {
     ctx.strokeStyle = "#003300";
     ctx.stroke();
   }
+
 }
 function clearRect() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
