@@ -10,7 +10,6 @@ ctx.fillStyle = "#ff0000";
 var mode = "rectangle";
 
 function draw(event) {
-
   // correct canvas bounds offset on mouse's x, y position
   let rect = canvas.getBoundingClientRect();
   let x = event.clientX - rect.left;
@@ -29,11 +28,12 @@ function draw(event) {
     ctx.strokeStyle = "#003300";
     ctx.stroke();
   }
-
 }
+
 function clearRect() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
+
 function switchMode() {
   if (mode == "rectangle") {
     mode = "dot";
