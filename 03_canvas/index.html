@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+  </head>
+
+  <body>
+    <div>
+      <canvas height="600" width="600" id="slate"
+        >Cannot be loaded; please update your browser.</canvas
+      >
+    </div>
+    <style>
+      #slate {
+        border: 1px solid black;
+      }
+    </style>
+    <script>
+        // retrieve node in DOM via ID
+        var c = document.getElementById("slate");
+        // instantiate a CanvasRenderingContext2D object
+        var ctx = c.getContext("2d");
+        console.log(ctx);
+        // invoke interface methods
+        ctx.fillStyle = "#ff0000";
+        ctx.fillRect(50, 50, 100, 200);
+    </script>
+  </body>
+</html>
