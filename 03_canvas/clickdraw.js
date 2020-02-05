@@ -16,7 +16,11 @@ function draw(event) {
   let y = event.clientY - rect.top;
 
   if (mode == "rectangle") {
-    ctx.fillRect(x, y, 100, 200);
+    // make it look like square is drawn from the center where user clicks
+    x -= 25;
+    y -= 25;
+    
+    ctx.fillRect(x, y, 50, 50);
   } else {
     var radius = 10;
 
