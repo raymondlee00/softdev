@@ -19,7 +19,7 @@ function draw(event) {
     // make it look like square is drawn from the center where user clicks
     x -= 25;
     y -= 25;
-    
+
     ctx.fillRect(x, y, 50, 50);
   } else {
     var radius = 10;
@@ -44,5 +44,6 @@ function switchMode() {
   } else {
     mode = "rectangle";
   }
+  document.getElementById("draw-mode").innerHTML = "display mode: " + mode;
   console.log(mode);
 }
