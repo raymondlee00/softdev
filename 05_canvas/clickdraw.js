@@ -39,6 +39,7 @@ const clearCanvas = function() {
 
 const drawRect = function(x, y) {
   console.log(`drawing rectangle at ${x}, ${y}`);
+  x -= RECT_WIDTH / 2, y-= RECT_HEIGHT / 2;
   ctx.fillRect(x, y, RECT_WIDTH, RECT_HEIGHT);
 };
 
