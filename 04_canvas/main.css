@@ -1,3 +1,16 @@
+#intro {
+  text-align: center;
+}
+
 #slate {
   border: 1px solid black;
+}
+
+#ctl-btns {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+#canvas {
+  text-align: center;
 }

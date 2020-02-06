@@ -3,18 +3,21 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Page Title</title>
+    <title>canvas</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
   </head>
   <body>
-    <button onclick="clearRect()">clear</button>
-    <button onclick="switchMode()">switch mode</button>
-
-    <canvas height="800" width="800" id="slate" onclick="draw(event)"
-      >Cannot be loaded; please update your browser.</canvas
-    >
-
+    <h2 id="intro">"devin" + "ray" = "vineyard" :: canvas</h2>
+    <div id="ctl-btns">
+      <button onclick="clearRect()">clear</button>
+      <button onclick="switchMode()">switch mode</button>
+    </div>
+    <div id="canvas">
+      <canvas height="800" width="800" id="slate" onclick="draw(event)"
+        >Cannot be loaded; please update your browser.</canvas
+      >
+    </div>
     <script src="clickdraw.js"></script>
   </body>
 </html>
