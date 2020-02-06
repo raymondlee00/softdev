@@ -11,9 +11,8 @@ var mode = "rectangle";
 
 function draw(event) {
   // correct canvas bounds offset on mouse's x, y position
-  let rect = canvas.getBoundingClientRect();
-  let x = event.clientX - rect.left;
-  let y = event.clientY - rect.top;
+  let x = event.offsetX;
+  let y = event.offsetY;
 
   if (mode == "rectangle") {
     // invoke interface methods
