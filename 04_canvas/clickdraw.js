@@ -4,7 +4,7 @@ var canvas = document.getElementById("slate");
 // instantiate a CanvasRenderingContext2D object
 var ctx = canvas.getContext("2d");
 
-ctx.fillStyle = "1B1B1B";
+ctx.fillStyle = "#1B1B1B";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 var mode = "rectangle";
@@ -39,6 +39,8 @@ function draw(event) {
 
 function clearRect() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "#1B1B1B";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
 function switchMode() {
