@@ -4,8 +4,8 @@ var canvas = document.getElementById("slate");
 // instantiate a CanvasRenderingContext2D object
 var ctx = canvas.getContext("2d");
 
-// invoke interface methods
-ctx.fillStyle = "#ff0000";
+ctx.fillStyle = "1B1B1B";
+ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 var mode = "rectangle";
 
@@ -16,6 +16,9 @@ function draw(event) {
   let y = event.clientY - rect.top;
 
   if (mode == "rectangle") {
+    // invoke interface methods
+    ctx.fillStyle = "#ff0000";
+
     // make it look like square is drawn from the center where user clicks
     x -= 25;
     y -= 25;
@@ -29,7 +32,7 @@ function draw(event) {
     ctx.fillStyle = "red";
     ctx.fill();
     ctx.lineWidth = 0;
-    ctx.strokeStyle = "#003300";
+    ctx.strokeStyle = "red";
     ctx.stroke();
   }
 }
