@@ -51,7 +51,6 @@ const drawDot = function(x, y) {
 };
 
 const draw = function(e) {
-  let bound = c.getBoundingClientRect();
   let x = e.offsetX;
   let y = e.offsetY;
   if (mode == "r") {
