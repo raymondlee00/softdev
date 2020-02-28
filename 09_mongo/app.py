@@ -11,7 +11,7 @@ def ingest(f):
     with open(f) as _f:
         return loads(f'[{",".join(map(lambda s: s[:-1], _f))}]')
 
-# result = restaurants.insert_many(ingest("primer-dataset.json"))
+result = restaurants.insert_many(ingest("primer-dataset.json"))
 
 # search all restaurants in in a given borough
 def search_borough(borough):
@@ -57,9 +57,8 @@ def search_coords_date(offset):
         40 + offset,
     )
     query = restaurants.find(
-        {"$or": [{"address.coord.0": {"$gte": xlower}}, {"address.coord.1": {"$lte": xupper}}]}
-        
+        {"address.coord.0": {"$gte": xlower}}
     )
     return [restaurant for restaurant in query]
 
-pprint(search_coords_date(1))
+pprint(search_coords_date(1)[:5])
