@@ -57,11 +57,9 @@ def search_coords_date(offset):
         40 + offset,
     )
     query = restaurants.find(
-        {
-            "address.coord.0": {"$elemMatch": {"$gt": xlower, "$lt": xupper}},
-            "address.coord.1": {"$elemMatch": {"$gt": ylower, "$lt": yupper}}
-        }
+        {"$or": [{"address.coord.0": {"$gte": xlower}}, {"address.coord.1": {"$lte": xupper}}]}
+        
     )
     return [restaurant for restaurant in query]
 
-pprint(search_coords_date(1)[:5])
+pprint(search_coords_date(1))
