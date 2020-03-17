@@ -11,31 +11,52 @@
 # Before loading we cleaned the dataset be removing the last two extra columns for some rows
 # ,":@computed_region_cbhk_fwbd":"[0-9]{1,}",":@computed_region_nnqa_25f4":"[0-9]{1,}"
 
+# from pymongo import MongoClient
+# from bson.json_util import loads
+# from pprint import pprint
+
+# client = MongoClient("localhost", 27017)
+# db = client.test_database
+# spacex = db.spacex
+
+# # loads starting JSON dataset to the db
+# def ingest(f):
+#     with open(f) as _f:
+#         return loads(f'[{",".join(map(lambda s: s[:-1], _f))}]')
+
+# result = spacex.insert_many(ingest("meteorites.json"))
+
+# teamRAM - Michael Zhang and Amanda Chen
+# SoftDev pd1
+# K10: Import/Export Bank
+# 2020-03-02
+
 from pymongo import MongoClient
 import json
 from pprint import pprint
 
-client = MongoClient("localhost", 27017)
+client = MongoClient("localhost")
+db = client.RAM
+meteors = db.meteors
 
-db = client.spacex
-meteorites = db.meteorites
-meteorites.drop()
+if meteors in db.list_meteorslection_names():
+    f = open("meteorites.json", "r")
+    rString = f.readlines()
+    t = loads(rString)
 
-# loads starting JSON dataset to the db
-def ingest(fin):
-    with open(fin) as _fin:
-        content = _fin.read()
-        _fin.close()
-        dataset = json.loads(content)
-        meteorites.insert_many(dataset)
-        return dataset
 
-result = ingest("meteorites.json")
+def filter_mass(mass):
+    return list(meteors.find({"mass": mass}))
 
-pprint(result)
 
-def search_name(name):
-    query = meteorites.find({'name': name})
-    return [meteorite for meteorite in query]
+def filter_coords(longitude, lat):
+    return list(meteors.find({"reclong": longitude, "reclat": lat}))
 
+
+def filter_class(recclass):
+    return list(meteors.find({"recclass": recclass}))
+
+
+def filter_year(year):
+    return list(meteors.find({"year": year}))
 
