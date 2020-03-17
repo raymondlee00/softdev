@@ -12,17 +12,30 @@
 # ,":@computed_region_cbhk_fwbd":"[0-9]{1,}",":@computed_region_nnqa_25f4":"[0-9]{1,}"
 
 from pymongo import MongoClient
-from bson.json_util import loads
+import json
 from pprint import pprint
 
 client = MongoClient("localhost", 27017)
-db = client.test_database
-restaurants = db.restaurants
+
+db = client.spacex
+meteorites = db.meteorites
+meteorites.drop()
 
 # loads starting JSON dataset to the db
-def ingest(f):
-    with open(f) as _f:
-        return loads(f'[{",".join(map(lambda s: s[:-1], _f))}]')
+def ingest(fin):
+    with open(fin) as _fin:
+        content = _fin.read()
+        _fin.close()
+        dataset = json.loads(content)
+        meteorites.insert_many(dataset)
+        return dataset
 
-result = restaurants.insert_many(ingest("meteorites.json"))
+result = ingest("meteorites.json")
+
+pprint(result)
+
+def search_name(name):
+    query = meteorites.find({'name': name})
+    return [meteorite for meteorite in query]
+
 
