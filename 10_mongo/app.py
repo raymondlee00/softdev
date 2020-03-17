@@ -32,7 +32,7 @@
 # 2020-03-02
 
 from pymongo import MongoClient
-from bson.json_util import loads
+import json
 from pprint import pprint
 
 client = MongoClient("localhost")
