@@ -1,34 +1,49 @@
-/*
- * doubLee2: Junhee Lee, Raymond Lee
- * SoftDev2 pd1
- * K06 :: Canvas pt. 3
- * 2020-02-11
- */
+const pic = document.getElementById("vimage");
+const clearBtn = document.getElementById("clearBtn");
+const xmlns = "http://www.w3.org/2000/svg";
+var firstClick = true;
+var lastClickCoords = {
+    x: null,
+    y: null
+};
 
-const DOT_RADIUS = 2;
-const c = document.getElementById("playground");
-const ctx = c.getContext("2d");
+var draw = function(event) {
+    const mouseX = event.offsetX;
+    const mouseY = event.offsetY;
+    const mouseCoordsString = `${mouseX},${mouseY}`;
+    console.log(`Drawing a circle at (${mouseCoordsString})`);
+    const dot = document.createElementNS(xmlns, "circle");
+    dot.setAttribute("cx", mouseX);
+    dot.setAttribute("cy", mouseY);
+    dot.setAttribute("r", 10);
+    dot.setAttribute("fill", "lightgreen");
+    pic.appendChild(dot);
+    if (!firstClick) {
+	const line = document.createElementNS(xmlns, "line");
+	line.setAttribute("x1", lastClickCoords.x)
+	line.setAttribute("y1", lastClickCoords.y)
+	line.setAttribute("x2", mouseX)
+	line.setAttribute("y2", mouseY)
+	line.setAttribute("stroke", "black")
+	pic.appendChild(line);
+    }
+    lastClickCoords.x = mouseX
+    lastClickCoords.y = mouseY
+    if (firstClick) {
+	firstClick = false;
+    };
+};
 
-const clearCanvas = function() {
-	console.log("clearing drawings");
-    ctx.clearRect(0,0,c.width,c.height);
-    ctx.closePath();
+var clear = function(event) {
+    event.preventDefault();
+    console.log("Clearing svg");
+    const blank = document.createElementNS(xmlns, "rect")
+    blank.setAttribute("height", 500);
+    blank.setAttribute("width", 500);
+    blank.setAttribute("fill", "white");
+    pic.appendChild(blank);
+    firstClick = true;
 }
 
-const draw = function(e) {
-	let x = e.offsetX;
-	let y = e.offsetY;
-	console.log(`drawing path to ${x}, ${y}`);
-	ctx.lineTo(x, y);
-	ctx.stroke();
-	ctx.beginPath();
-	ctx.arc(x,y,DOT_RADIUS,0, 2 * Math.PI, false);
-	ctx.fill();
-	ctx.beginPath();
-	ctx.moveTo(x, y);
-}
-
-c.addEventListener("mousedown", draw);
-
-const cbutton = document.getElementById("clear");
-cbutton.addEventListener("click", clearCanvas);
+pic.addEventListener("mousedown", draw);
+clearBtn.addEventListener("click", clear);
