@@ -5,10 +5,10 @@ const clearBtn = document.getElementById("clearBtn");
 const xmlns = "http://www.w3.org/2000/svg";
 let onDot = false;
 
-const createDotElement = (mouseX, mouseY) => {
+const createDotElement = (dotX, dotY) => {
   const dot = document.createElementNS(xmlns, "circle");
-  dot.setAttributeNS(null, "cx", mouseX);
-  dot.setAttributeNS(null, "cy", mouseY);
+  dot.setAttributeNS(null, "cx", dotX);
+  dot.setAttributeNS(null, "cy", dotY);
   dot.setAttributeNS(null, "r", 30);
   dot.setAttributeNS(null, "fill", "lightgreen");
   dot.setAttributeNS(null, "data-num-clicks", 0);
@@ -33,26 +33,18 @@ const mutateDot = event => {
   const dot = event.target;
   let numClicks = parseInt(dot.getAttributeNS(null, "data-num-clicks"));
   numClicks++;
-  // if (numClicks > 1) {
-  //   console.log(numClicks);
-  // }
-  // console.log("before mutation...", onDot);
   switch (numClicks) {
     case 1:
       dot.style.fill = "green";
       break;
     case 2:
-      // console.log("before random dot...", onDot);
       dot.parentNode.removeChild(dot);
       const randomX = Math.random() * 400 + 50;
       const randomY = Math.random() * 400 + 50;
-      const randomDot = createDotElement(randomX, randomY);
+      drawDot(randomX, randomY);
       console.log("create random dot");
-      pic.appendChild(randomDot);
-      // const jankDot = drawDot(event);
-      // jankDot.parentNode.removeChild(jankDot);
-      // onDot = false;
-      // console.log("after random dot...", onDot);
+      onDot = false;
+      // pic.appendChild(randomDot);
       break;
   }
   dot.setAttributeNS(null, "data-num-clicks", numClicks);
