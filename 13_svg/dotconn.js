@@ -15,6 +15,7 @@ const createDotElement = (mouseX, mouseY) => {
   dot.addEventListener("mouseover", () => (onDotClick = true));
   dot.addEventListener("mouseout", () => (onDotClick = false));
   dot.addEventListener("click", e => mutateDot(e));
+  // console.log(dot);
   return dot;
 };
 
@@ -34,8 +35,21 @@ const mutateDot = event => {
   const dot = event.target;
   let numClicks = parseInt(dot.getAttributeNS(null, "data-num-clicks"));
   numClicks++;
-  if (numClicks > 1) {
-    console.log(numClicks);
+  // if (numClicks > 1) {
+  //   console.log(numClicks);
+  // }
+  switch (numClicks) {
+    case 1:
+      dot.style.fill = "green";
+      break;
+    case 2:
+      dot.parentNode.removeChild(dot);
+      const randomDot = createDotElement(
+        Math.random() * 400 + 50,
+        Math.random() * 400 + 50
+      );
+      pic.appendChild(randomDot);
+      break;
   }
   dot.setAttribute("data-num-clicks", numClicks);
   console.log(dot);
