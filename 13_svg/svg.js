@@ -1,4 +1,7 @@
-"use strict";
+// Kazi Jamal and ray. lee. -- Team coronacation
+// SoftDev1 pd9
+// K13 -- Ask Circles [Change || Die]
+// 2020-03-31
 
 const pic = document.getElementById("vimage");
 const clearBtn = document.getElementById("clearBtn");
@@ -20,7 +23,7 @@ const createDotElement = (dotX, dotY) => {
 };
 
 const drawDot = (dotX, dotY) => {
-  console.log("draw dot");
+  // console.log("draw dot");
   if (!onDot) {
     const dot = createDotElement(dotX, dotY);
     pic.appendChild(dot);
@@ -31,28 +34,28 @@ const drawDot = (dotX, dotY) => {
 
 const mutateDot = event => {
   const dot = event.target;
-  let numClicks = parseInt(dot.getAttributeNS(null, "data-num-clicks"));
+  var numClicks = parseInt(dot.getAttributeNS(null, "data-num-clicks"));
   numClicks++;
-  switch (numClicks) {
-    case 1:
-      dot.style.fill = "green";
-      break;
-    case 2:
-      dot.parentNode.removeChild(dot);
-      const randomX = Math.random() * 400 + 50;
-      const randomY = Math.random() * 400 + 50;
-      drawDot(randomX, randomY);
-      console.log("create random dot");
-      onDot = false;
-      // pic.appendChild(randomDot);
-      break;
+  if (numClicks == 1) {
+    dot.setAttributeNS(null, "fill", "green");
+  } else if (numClicks == 2) {
+    pic.removeChild(dot);
+    const randomX = Math.random() * 440 + 30;
+    const randomY = Math.random() * 440 + 30;
+    onDot = false;
+    drawDot(randomX, randomY);
+    // console.log("create random dot");
   }
   dot.setAttributeNS(null, "data-num-clicks", numClicks);
-  console.log(dot);
 };
 
 const clear = () => {
-  pic.innerHTML = "";
+  var fc = pic.firstChild;
+  while (fc) {
+    console.log("removing " + fc + "...");
+    pic.removeChild(fc);
+    fc = pic.firstChild;
+  }
   onDot = false;
 };
 
@@ -63,7 +66,5 @@ const draw = event => {
   // console.log(onDot);
 };
 
-pic.addEventListener("click", draw);
+pic.addEventListener("mousedown", draw);
 clearBtn.addEventListener("click", clear);
-
-setInterval(() => console.log(onDot), 1000);
