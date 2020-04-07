@@ -1,0 +1,4 @@
+Notes
+- The pink color in the background transitions into place every time I refresh (Ctrl+F5)
+- Load d3.js by typing in "d3 = require("d3@5")"
+- 

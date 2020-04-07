@@ -6,57 +6,48 @@
     ...but will yield only blank page at first.
   -->
 <!--
-Clyde "Thluffy" Sinclair
-SoftDev2 pd0
-2099-12-31
+ray. lee. & Justin Chen
+SoftDev2 pd1 / pd 2
+2020-04-07
 -->
 
-<style>
-  .chart div {
-    font: 10px sans-serif;
-    background-color: steelblue;
-    text-align: right;
-    padding: 3px;
-    margin: 1px;
-    color: white;
-  }
-</style>
-
-<body>
-  <div class="chart"></div>
-  <svg id="vimage" height="1000" width="1000" style="border: 1px solid;">
-    <circle cx="500" cy="100" r="10" fill="blue"></circle>
-    Sorry, your browser does not support inline SVG.
-  </svg>
-</body>
+<div class="chart"></div>
 
 <script src="http://d3js.org/d3.v5.min.js" charset="utf-8"></script>
 
+<script src="d3_noob.js"></script>
+
 <script>
-  //Init your data:
-  var data = [4, 8, 15, 16, 23, 42];
-  //Select your chart.
-  var chart = d3.select(".chart");
-  //Prepare for data join.
-  var bar = chart.selectAll("div");
-  // (this defines selection to which you will join data)
-  //Join your data.
-  var barUpdate = bar.data(data);
-  //Instantiate new elements by appending to the “enter selection.”
-  var barEnter = barUpdate.enter().append("div");
-  //Set width of each bar proportional to its data value.
-  barEnter.style("width", function (d) {
-    return d * 10 + "px";
-  });
-  //Label each bar.
-  barEnter.text(function (d) {
-    return d;
-  });
-  d3.select("body").transition().style("background-color", "black");
-  d3.selectAll("circle").transition()
-    .duration(750)
-    .delay(function(d, i) { return i * 10; })
-    .attr("r", function(d) { return Math.sqrt(d * scale); });
+  // Create an empty (detached) chart container.
+  const div = d3.create("div");
+
+  // Apply some styles to the chart container.
+  div.style("font", "10px sans-serif");
+  div.style("text-align", "right");
+  div.style("color", "white");
+
+  // Define the initial (empty) selection for the bars.
+  const bar = div.selectAll("div");
+
+  // Bind this selection to the data (computing enter, update and exit).
+  const barUpdate = bar.data(data);
+
+  // Join the selection and the data, appending the entering bars.
+  const barNew = barUpdate.join("div");
+
+  // Apply some styles to the bars.
+  barNew.style("background", "steelblue");
+  barNew.style("padding", "3px");
+  barNew.style("margin", "1px");
+
+  // Set the width as a function of data.
+  barNew.style("width", (d) => `${d * 10}px`);
+
+  // Set the text of each bar as the data.
+  barNew.text((d) => d);
+
+  // Return the chart container.
+  return div.node();
 </script>
 
 <!--------------------------------
@@ -79,8 +70,31 @@ SoftDev2 pd0
     //Label each bar.
     barEnter.text(function(d) { return d; });
 
+    //fade to black
+    d3.select("body").transition()
+    .style("background-color", "black");
 
-    Notes
+    //resize circles with delay
+    d3.selectAll("circle").transition()
+    .duration(750)
+    .delay(function(d, i) { return i * 10; })
+    .attr("r", function(d) { return Math.sqrt(d * scale); });
+
+
+    Notes v0
+    Predictions
+    - Initial load of the page is empty until commented commands are run in dev console
+    - First sign of things happening on the page is from running the .enter().append("div") command,
+      but every bar will be really small and take up the same amount of space
+    Observations
+    - Forgot that the default behavior of a div is to take up the whole width of its row
+    - Otherwise, pretty expected behavior
+    Others
+    - The chart variable is just an empty div. What's the point of running .selectAll() on chart?
+    - Kinda confused as to what the .data() and .enter() functions do
+
+
+    Notes v1
     Observations
     - chart is an object that holds an array of the chart
     - bar is an object that holds an array of nodelists
