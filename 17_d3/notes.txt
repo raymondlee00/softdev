@@ -1,4 +1,9 @@
 Notes
 - The pink color in the background transitions into place every time I refresh (Ctrl+F5)
 - Load d3.js by typing in "d3 = require("d3@5")"
-- 
+- Learning by examples is the fastest
+- Lazy loading the array of data is optimal
+
+Questions
+- How does D3 render DOM objects?
+- Does D3 use a virtual DOM system to detect changes? Especially if the graphics are going to be intensive.
