@@ -46,21 +46,21 @@ SoftDev2 pd0
     //Label each bar.
     barEnter.text(function(d) { return d; });
 
-    
+
     Notes
     Observations
     - chart is an object that holds an array of the chart
     - bar is an object that holds an array of nodelists
     - barUpdate stores the data
     - barEnter stores an array of the divs
+    - var barUpdate = bar.data(data); returns undefined
+    - var barEnter = barUpdate.enter().append("div"); returns undefined and creates 5 blue bars that take up the entire width of the page (w/ side margins)
+    - barEnter.style("width", function(d) {
+    - return d * 10 + "px"; }); returns a Prototype object and cuts down the blue bars incrementally
+    - barEnter.text(function(d) { return d; }); returns a Protoype object and appends white text of the bar width on the far right of the bar
 
     Questions
     - What are the enter and exit parts of barUpdate?
     - Why do we selectAll divs from the chart?
     - What is the prototype field?
-    var barUpdate = bar.data(data); returns undefined
-    var barEnter = barUpdate.enter().append("div"); returns undefined and creates 5 blue bars that take up the entire width of the page (w/ side margins)
-    barEnter.style("width", function(d) {
-    return d * 10 + "px"; }); returns a Prototype object and cuts down the blue bars incrementally
-    barEnter.text(function(d) { return d; }); returns a Protoype object and appends white text of the bar width on the far right of the bar
   -------------------------------->
