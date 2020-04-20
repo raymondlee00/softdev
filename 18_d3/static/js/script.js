@@ -1,3 +1,5 @@
+const map = document.querySelector('#map');
+
 //Credit: http://bl.ocks.org/michellechandra/0b2ce4923dc9b5809922 for showing how to display an interactable US map
 //Width and height of map
 const width =
@@ -22,7 +24,7 @@ const path = d3.geo
 
 //Create SVG element and append map to the SVG
 const svg = d3
-  .select('body')
+  .select('#map')
   .append('svg')
   .attr('width', width)
   .attr('height', height);

@@ -58,26 +58,26 @@ d3.csv('/static/csv/stateslived.csv', (data) => {
   d3.json('/static/json/us-states.json', (json) => {
     // Loop through each state data value in the .csv file
     console.log(data.length);
-    // for (let i = 0; i < 50; i++) {
-    //   // Grab State Name
-    //   const dataState = data[i].state;
+    for (let i = 0; i < 50; i++) {
+      // Grab State Name
+      const dataState = data[i].state;
 
-    //   // Grab data value
-    //   const dataValue = data[i].visited;
+      // Grab data value
+      const dataValue = data[i].visited;
 
-    //   // Find the corresponding state inside the GeoJSON
-    //   for (let j = 0; j < json.features.length; j++) {
-    //     const jsonState = json.features[j].properties.name;
+      // Find the corresponding state inside the GeoJSON
+      for (let j = 0; j < json.features.length; j++) {
+        const jsonState = json.features[j].properties.name;
 
-    //     if (dataState == jsonState) {
-    //       // Copy the data value into the JSON
-    //       json.features[j].properties.visited = dataValue;
+        if (dataState == jsonState) {
+          // Copy the data value into the JSON
+          json.features[j].properties.visited = dataValue;
 
-    //       // Stop looking through the JSON
-    //       break;
-    //     }
-    //   }
-    // }
+          // Stop looking through the JSON
+          break;
+        }
+      }
+    }
 
     // Bind the data to the SVG and create one path per GeoJSON feature
     svg
