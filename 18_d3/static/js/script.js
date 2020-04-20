@@ -21,13 +21,6 @@ const svg = d3
   .attr('width', width)
   .attr('height', height);
 
-// Append Div for tooltip to SVG
-const div = d3
-  .select('body')
-  .append('div')
-  .attr('class', 'tooltip')
-  .style('opacity', 0);
-
 const cachedUSStatesJSON = JSON.parse(localStorage.getItem('USStatesJSON'));
 
 const drawUSStatesPath = (json) => {
@@ -52,6 +45,5 @@ if (!cachedUSStatesJSON) {
     drawUSStatesPath(json);
   });
 } else {
-  console.log(cachedUSStatesJSON);
   drawUSStatesPath(cachedUSStatesJSON);
 }
