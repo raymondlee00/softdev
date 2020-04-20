@@ -10,7 +10,7 @@ Mike Bostock, Pie Chart Legend
 http://bl.ocks.org/mbostock/3888852  */
 
 //Width and height of map
-var width = 1200;
+var width = 800;
 var height = 600;
 
 // D3 Projection

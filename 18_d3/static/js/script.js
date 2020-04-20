@@ -1,7 +1,13 @@
 //Credit: http://bl.ocks.org/michellechandra/0b2ce4923dc9b5809922 for showing how to display an interactable US map
 //Width and height of map
-const width = 1200;
-const height = 600;
+const width =
+  window.innerWidth ||
+  document.documentElement.clientWidth || // for IE8 and earlier
+  document.body.clientWidth;
+const height =
+  window.innerHeight ||
+  document.documentElement.clientHeight || // for IE8 and earlier
+  document.body.clientHeight;
 
 // D3 Projection
 const projection = d3.geo
