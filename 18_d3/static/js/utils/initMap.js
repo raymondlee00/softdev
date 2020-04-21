@@ -19,34 +19,39 @@ const createStatePaths = (svg, path) => {
 // Create labels for all states
 const labelStatePaths = (svg, path) => {
   const json = getMapData();
+
   svg
     .selectAll('text')
     .data(json.features)
     .enter()
     .append('text')
     .text('0')
-    .attr('x', (d) => path.centroid(d)[0])
-    .attr('y', (d) => path.centroid(d)[1])
+    .attr('x', (d) => {
+      const xCentroid = path.centroid(d)[0]; // Check for paths where their centroid is NaN (ex: Puerto Rico)
+      if (Number.isNaN(xCentroid)) return; // Solves console error: <text> attribute x: Expected length, “NaN”
+      return path.centroid(d)[0];
+    })
+    .attr('y', (d) => {
+      const yCentroid = path.centroid(d)[1];
+      if (Number.isNaN(yCentroid)) return;
+      return path.centroid(d)[1];
+    })
     .attr('id', (d) => d.properties.name) // Associate text's custom data attribute with corresponding state
     .style('color', 'black');
 };
 
 // Setup map
-const setMap = () => {
-  // Width and height of map
+const setupMap = () => {
   const width = 1200;
   const height = 600;
 
-  // D3 Projection
   const projection = d3
     .geoAlbersUsa()
-    .translate([width / 2, height / 2]) // translate to center of screen
-    .scale([1300]); // scale things down so see entire US
+    .translate([width / 2, height / 2])
+    .scale([1300]);
 
-  // Define path generator
-  const path = d3.geoPath(projection); // path generator that will convert GeoJSON to SVG paths and tell path generator to use albersUsa projection
+  const path = d3.geoPath(projection);
 
-  // Create SVG element and append map to the SVG
   const svg = d3
     .select('#map')
     .append('svg')

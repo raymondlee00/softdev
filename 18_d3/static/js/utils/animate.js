@@ -25,5 +25,3 @@ const animateMap = () => {
     }, delay(new Date(d.date))); // Like before, the date string must be wrapped in a Date object!
   }
 };
-
-// export default animateMap;

@@ -5,8 +5,10 @@ let playing = false;
 // Handlers
 const toggleMapHandler = (event) => {
   event.preventDefault();
-  renderMap = true;
-  init();
+  if (!renderMap) {
+    renderMap = true;
+    init();
+  }
 };
 
 const startHandler = (event) => {
@@ -23,7 +25,7 @@ renderBtn.addEventListener('click', toggleMapHandler);
 const startBtn = document.getElementById('start-btn');
 startBtn.addEventListener('click', startHandler);
 
-// Initialize map setup
+// Initialize app
 const init = () => {
-  setMap();
+  setupMap();
 };
