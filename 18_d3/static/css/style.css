@@ -8,9 +8,17 @@ body {
   text-align: center;
   font-family: 'Open Sans', sans-serif;
   background-color: salmon;
+  overflow: auto;
 }
 
-#replay-btn {
+#map {
+  /* Fix the press start button and then horizontal scrollbar glitch */
+  overflow: auto;
+  /* margin: auto; */
+  padding-bottom: 100px;
+}
+
+button {
   background-color: #eee;
   color: black;
   border: 2px solid black;
@@ -22,6 +30,11 @@ body {
   font-size: 20px;
 }
 
-#replay-btn:hover {
+button:hover {
   background-color: #ccc;
+}
+
+text {
+  color: black;
+  font: inherit;
 }

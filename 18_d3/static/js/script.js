@@ -1,24 +1,19 @@
 // Credit: http://bl.ocks.org/michellechandra/0b2ce4923dc9b5809922 for showing how to display an interactable US map
 
+let renderMap = false;
 let playing = false;
 
 // Setup map
 const setMap = (json) => {
   // Width and height of map
-  const width =
-    window.innerWidth ||
-    document.documentElement.clientWidth || // for IE8 and earlier
-    document.body.clientWidth;
-  const height =
-    window.innerHeight ||
-    document.documentElement.clientHeight || // for IE8 and earlier
-    document.body.clientHeight;
+  const width = 1200;
+  const height = 600;
 
   // D3 Projection
   const projection = d3
     .geoAlbersUsa()
     .translate([width / 2, height / 2]) // translate to center of screen
-    .scale([1200]); // scale things down so see entire US
+    .scale([1300]); // scale things down so see entire US
 
   // Define path generator
   const path = d3.geoPath(projection); // path generator that will convert GeoJSON to SVG paths and tell path generator to use albersUsa projection
@@ -38,20 +33,23 @@ const setMap = (json) => {
     .append('path')
     .attr('d', path)
     .attr('data-state', (d) => d.properties.name) // Associate path's custom data attribute with corresponding state
+    .attr('data-cases', 0) // Initialize all states with 0 cases
     .style('stroke', 'salmon')
     .style('stroke-width', '1')
-    .style('fill', () => '#fff');
-};
+    .style('fill', '#fff');
 
-// const drawMap = (json) => {
-//   d3.csv('/static/csv/states.csv', (data) => {
-//     for (let i = 0; i < 50; i++) {
-//       const dataState = data[i].state;
-//       console.log;
-//     }
-//     drawUSStatesPath(json);
-//   });
-// };
+  // Create labels for all states
+  svg
+    .selectAll('text')
+    .data(json.features)
+    .enter()
+    .append('text')
+    .text('0')
+    .attr('x', (d) => path.centroid(d)[0])
+    .attr('y', (d) => path.centroid(d)[1])
+    .attr('id', (d) => d.properties.name) // Associate text's custom data attribute with corresponding state
+    .style('color', 'black');
+};
 
 // Returns GeoJSON data for setMap to use
 const setMapData = () => {
@@ -72,55 +70,62 @@ const setMapData = () => {
   return cachedUSStatesJSON;
 };
 
+// Control the animation of the state labels and colors
+const animateMap = () => {
+  let delay = null;
+  // Load US states JSON with forwarded geocoding (latitude and longitude)
+  d3.csv('/static/csv/us-states-covid.csv')
+    .then((data) => {
+      // Map the domain difference between the beginning date of the dataset and the most recent date of the dataset to 20 seconds (20,000 milliseconds)
+      delay = d3
+        .scaleTime()
+        .domain([new Date(data[0].date), new Date(data[data.length - 1].date)])
+        .range([0, 20000]);
+      for (const d of data) {
+        const date = document.getElementById('date');
+        const stateTextElement = document.getElementById(d.state);
+        if (!date || !stateTextElement) continue; // ex: Virgin Islands is not on the map so either date or stateTextElement would be null
+        setTimeout(() => {
+          // console.log(delay);
+          date.textContent = d.date;
+          stateTextElement.textContent = d.cases;
+        }, 1000);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 // Initialize map setup
 const init = () => {
   setMap(setMapData());
 };
 
-let delay = null;
-// Load US states JSON with forwarded geocoding (latitude and longitude)
-d3.csv('/static/csv/us-states-geocoded.csv')
-  .then((data) => {
-    // Map the domain difference between the beginning date of the dataset and the most recent date of the dataset to 20 seconds (20,000 milliseconds)
-    delay = d3
-      .scaleTime()
-      .domain([new Date(data[0].date), new Date(data[data.length - 1].date)])
-      .range([0, 20000]);
-
-    // Still need to make sense of this
-    // const svg = d3.select('svg');
-    // for (const d of data) {
-    //   d3.timeout(() => {
-    //     svg
-    //       .append('circle')
-    //       .attr('transform', `translate(${d})`)
-    //       .attr('r', 3)
-    //       .attr('fill-opacity', 1)
-    //       .attr('stroke-opacity', 0)
-    //       .transition()
-    //       .attr('fill-opacity', 0)
-    //       .attr('stroke-opacity', 1);
-    //   }, delay(d.date));
-    // }
-
-    // svg
-    //   .transition()
-    //   .ease(d3.easeLinear)
-    //   .duration(delay.range()[1])
-    //   .tween('date', () => {
-    //     const i = d3.interpolateDate(...delay.domain());
-    //     return (t) => {
-    //       return new Date(d3.timeDay(i(t)));
-    //     };
-    //   });
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
-const replayHandler = () => {
-  playing = true;
+const toggleMapHandler = (event) => {
+  renderMap = !renderMap;
+  event.preventDefault();
+  if (renderMap) {
+    init();
+  } else {
+    const el = document.getElementById('map');
+    while (el.firstChild) el.removeChild(el.firstChild);
+    const date = document.getElementById('date');
+    date.textContent = '2020-01-21';
+    playing = false;
+  }
 };
 
-const replayBtn = document.querySelector('#replay-btn');
-replayBtn.addEventListener('click', replayHandler);
+const startHandler = (event) => {
+  event.preventDefault();
+  if (renderMap && !playing) {
+    playing = true;
+    animateMap();
+  }
+};
+
+const renderBtn = document.getElementById('render-btn');
+renderBtn.addEventListener('click', toggleMapHandler);
+
+const startBtn = document.getElementById('start-btn');
+startBtn.addEventListener('click', startHandler);
