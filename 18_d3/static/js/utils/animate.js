@@ -1,5 +1,3 @@
-// import { getCOVIDData } from './initData';
-
 // Control the animation of the state labels and colors
 const animateMap = () => {
   const data = getCOVIDData();

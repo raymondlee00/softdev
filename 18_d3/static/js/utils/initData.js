@@ -35,5 +35,3 @@ const getCOVIDData = () => {
 
   return cachedUSStatesCOVIDCSV;
 };
-
-// export { getMapData, getCOVIDData };

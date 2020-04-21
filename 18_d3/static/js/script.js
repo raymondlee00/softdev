@@ -1,5 +1,3 @@
-// import setMap from './utils/initMap';
-
 // Animation states
 let renderMap = false;
 let playing = false;
@@ -29,5 +27,3 @@ startBtn.addEventListener('click', startHandler);
 const init = () => {
   setMap();
 };
-
-// export default init;
