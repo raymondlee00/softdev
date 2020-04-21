@@ -1,4 +1,4 @@
-// Animation states
+// App states
 let renderMap = false;
 let playing = false;
 
