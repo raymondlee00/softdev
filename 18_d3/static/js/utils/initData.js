@@ -1,15 +1,11 @@
 // Returns GeoJSON data
 const getMapData = () => {
-  const cachedUSStatesJSON = JSON.parse(localStorage.getItem('USStatesJSON'));
-  return cachedUSStatesJSON;
+  return JSON.parse(localStorage.getItem('USStatesJSON'));
 };
 
 // Returns the COVID-19 data
 const getCOVIDData = () => {
-  const cachedUSStatesCOVIDCSV = JSON.parse(
-    localStorage.getItem('USStatesCOVIDCSV')
-  );
-  return cachedUSStatesCOVIDCSV;
+  return JSON.parse(localStorage.getItem('USStatesCOVIDCSV'));
 };
 
 // Initialize data caching

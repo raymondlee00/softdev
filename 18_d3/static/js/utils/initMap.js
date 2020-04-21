@@ -4,6 +4,7 @@
 const createStatePaths = (svg, path) => {
   const json = getMapData();
 
+  // Draw the path for each state
   svg
     .selectAll('path')
     .data(json.features)
@@ -21,6 +22,7 @@ const createStatePaths = (svg, path) => {
 const labelStatePaths = (svg, path) => {
   const json = getMapData();
 
+  // Initialize each state label with "0", or 0 cases of COVID-19
   svg
     .selectAll('text')
     .data(json.features)
