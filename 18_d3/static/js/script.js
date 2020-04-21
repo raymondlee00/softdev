@@ -1,5 +1,7 @@
 // Credit: http://bl.ocks.org/michellechandra/0b2ce4923dc9b5809922 for showing how to display an interactable US map
 
+let playing = false;
+
 // Setup map
 const setMap = (json) => {
   // Width and height of map
@@ -36,9 +38,9 @@ const setMap = (json) => {
     .append('path')
     .attr('d', path)
     .attr('data-state', (d) => d.properties.name) // Associate path's custom data attribute with corresponding state
-    .style('stroke', '#fff')
+    .style('stroke', 'salmon')
     .style('stroke-width', '1')
-    .style('fill', () => 'Crimson');
+    .style('fill', () => '#fff');
 };
 
 // const drawMap = (json) => {
@@ -116,4 +118,9 @@ d3.csv('/static/csv/us-states-geocoded.csv')
     console.log(err);
   });
 
-// console.log(d3.select('svg'));
+const replayHandler = () => {
+  playing = true;
+};
+
+const replayBtn = document.querySelector('#replay-btn');
+replayBtn.addEventListener('click', replayHandler);

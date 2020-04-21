@@ -7,10 +7,11 @@ body {
   margin: auto;
   text-align: center;
   font-family: 'Open Sans', sans-serif;
+  background-color: salmon;
 }
 
 #replay-btn {
-  background-color: transparent;
+  background-color: #eee;
   color: black;
   border: 2px solid black;
   cursor: pointer;
@@ -22,5 +23,5 @@ body {
 }
 
 #replay-btn:hover {
-  background-color: #eee;
+  background-color: #ccc;
 }
