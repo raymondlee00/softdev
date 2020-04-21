@@ -5,6 +5,7 @@ let playing = false;
 // Handlers
 const toggleMapHandler = (event) => {
   event.preventDefault();
+
   if (!renderMap) {
     renderMap = true;
     init();
@@ -13,6 +14,7 @@ const toggleMapHandler = (event) => {
 
 const startHandler = (event) => {
   event.preventDefault();
+
   if (renderMap && !playing) {
     playing = true;
     animateMap();

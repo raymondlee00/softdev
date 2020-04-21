@@ -3,6 +3,7 @@
 // Create paths for all states using GeoJSON data
 const createStatePaths = (svg, path) => {
   const json = getMapData();
+
   svg
     .selectAll('path')
     .data(json.features)
@@ -29,12 +30,12 @@ const labelStatePaths = (svg, path) => {
     .attr('x', (d) => {
       const xCentroid = path.centroid(d)[0]; // Check for paths where their centroid is NaN (ex: Puerto Rico)
       if (Number.isNaN(xCentroid)) return; // Solves console error: <text> attribute x: Expected length, “NaN”
-      return path.centroid(d)[0];
+      return xCentroid;
     })
     .attr('y', (d) => {
       const yCentroid = path.centroid(d)[1];
       if (Number.isNaN(yCentroid)) return;
-      return path.centroid(d)[1];
+      return yCentroid;
     })
     .attr('id', (d) => d.properties.name) // Associate text's custom data attribute with corresponding state
     .style('color', 'black');

@@ -2,22 +2,28 @@
 const animateMap = () => {
   const data = getCOVIDData();
 
-  // Map the domain difference between the beginning date of the dataset and the most recent date of the dataset to 20 seconds (20,000 milliseconds)
+  // Map the domain difference between the beginning date of the dataset and the most recent date of the dataset to animation duration
   const delay = d3
     .scaleTime()
     .domain([new Date(data[0].date), new Date(data[data.length - 1].date)])
-    .range([0, 20000]);
+    .range([0, 20000]); // in milliseconds
+
+  // Map the domain (COVID-19 cases) to a range of rbg values
   const stateColoring = d3
     .scaleLinear()
     .domain([0, 50000])
     .range(['white', 'red']);
+
+  // Go through each of the datapoints in us-states-covid.csv
   for (const d of data) {
     const date = document.getElementById('date');
     const statePathElement = document.querySelector(
       `path[data-state="${d.state}"]`
     );
     const stateTextElement = document.getElementById(d.state);
-    if (!date || !stateTextElement) continue; // ex: Virgin Islands is not on the map so either date or stateTextElement would be null
+
+    if (!date || !statePathElement || !stateTextElement) continue; // ex: Virgin Islands is not on the map so either date, statePathElement or stateTextElement would be null
+
     d3.timeout(() => {
       date.textContent = d.date;
       statePathElement.style.fill = stateColoring(+d.cases);
