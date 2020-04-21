@@ -85,11 +85,11 @@ const animateMap = () => {
         const date = document.getElementById('date');
         const stateTextElement = document.getElementById(d.state);
         if (!date || !stateTextElement) continue; // ex: Virgin Islands is not on the map so either date or stateTextElement would be null
-        setTimeout(() => {
-          // console.log(delay);
+        d3.timeout(() => {
+          // console.log(delay(new Date(d.date)));
           date.textContent = d.date;
           stateTextElement.textContent = d.cases;
-        }, 1000);
+        }, delay(new Date(d.date)));
       }
     })
     .catch((err) => {

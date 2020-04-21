@@ -37,4 +37,5 @@ button:hover {
 text {
   color: black;
   font: inherit;
+  font-size: 10px;
 }
