@@ -8,7 +8,7 @@ const animateMap = () => {
     .domain([new Date(data[0].date), new Date(data[data.length - 1].date)])
     .range([0, 20000]); // in milliseconds
 
-  // Map the domain (COVID-19 cases) to a range of rbg values
+  // Map the domain (COVID-19 cases) to a range of rgb values
   const stateColoring = d3
     .scaleLinear()
     .domain([0, 50000])
