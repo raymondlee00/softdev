@@ -8,7 +8,7 @@ const toggleMapHandler = (event) => {
 
   if (!renderMap) {
     renderMap = true;
-    init();
+    setupMap();
   }
 };
 
@@ -26,8 +26,3 @@ renderBtn.addEventListener('click', toggleMapHandler);
 
 const startBtn = document.getElementById('start-btn');
 startBtn.addEventListener('click', startHandler);
-
-// Initialize app
-const init = () => {
-  setupMap();
-};
