@@ -1,5 +1,7 @@
 // Credits to http://bl.ocks.org/michellechandra/0b2ce4923dc9b5809922 for showing how to display an interactable US map
 
+import { getMapData } from './initData.js';
+
 // Create paths for all states using GeoJSON data
 const createStatePaths = (svg, path) => {
   const json = getMapData();
@@ -64,3 +66,5 @@ const setupMap = () => {
   createStatePaths(svg, path);
   labelStatePaths(svg, path);
 };
+
+export default setupMap;

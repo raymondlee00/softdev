@@ -27,3 +27,5 @@ const cacheData = (key, filePath, extension) => {
     }
   }
 };
+
+export default cacheData;

@@ -1,3 +1,5 @@
+import { getCOVIDData } from './initData.js';
+
 // Control the animation of the state labels and colors
 const animateMap = () => {
   const data = getCOVIDData();
@@ -6,9 +8,9 @@ const animateMap = () => {
   const delay = d3
     .scaleTime()
     .domain([new Date(data[0].date), new Date(data[data.length - 1].date)])
-    .range([0, 20000]); // in milliseconds
+    .range([0, 10000]); // in milliseconds
 
-  // Map the domain (COVID-19 cases) to a range of rbg values
+  // Map the domain (COVID-19 cases) to a range of rgb values
   const stateColoring = d3
     .scaleLinear()
     .domain([0, 50000])
@@ -25,9 +27,15 @@ const animateMap = () => {
     if (!date || !statePathElement || !stateTextElement) continue; // ex: Virgin Islands is not on the map so either date, statePathElement or stateTextElement would be null
 
     d3.timeout(() => {
-      date.textContent = d.date;
+      if (d.date == '2020-04-20') {
+        date.textContent = `${d.date} 🥦`;
+      } else {
+        date.textContent = d.date;
+      }
       statePathElement.style.fill = stateColoring(+d.cases);
       stateTextElement.textContent = d.cases;
     }, delay(new Date(d.date))); // Like before, the date string must be wrapped in a Date object!
   }
 };
+
+export default animateMap;

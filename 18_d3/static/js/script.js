@@ -1,3 +1,6 @@
+import animateMap from './utils/animate.js';
+import setupMap from './utils/initMap.js';
+
 // App states
 let renderMap = false;
 let playing = false;
